@@ -7,6 +7,98 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class ImageSchema extends BaseModel {
+  static $columns = [
+    'createdAt',
+    'height',
+    'id',
+    'isPresentation',
+    'projectId',
+    'publicId',
+    'sortOrder',
+    'updatedAt',
+    'url',
+    'width',
+  ] as const
+  $columns = ImageSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare height: number
+  @column({ isPrimary: true })
+  declare id: bigint | number
+  @column()
+  declare isPresentation: boolean
+  @column()
+  declare projectId: bigint | number
+  @column()
+  declare publicId: string | null
+  @column()
+  declare sortOrder: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare url: string
+  @column()
+  declare width: number
+}
+
+export class ProjectCategorySchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'label', 'name', 'updatedAt', 'userId'] as const
+  $columns = ProjectCategorySchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: bigint | number
+  @column()
+  declare label: string
+  @column()
+  declare name: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: bigint | number | null
+}
+
+export class ProjectSchema extends BaseModel {
+  static $columns = [
+    'createdAt',
+    'description',
+    'id',
+    'link',
+    'maintenance',
+    'perso',
+    'projectCategoryId',
+    'size',
+    'stack',
+    'title',
+    'updatedAt',
+  ] as const
+  $columns = ProjectSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string
+  @column({ isPrimary: true })
+  declare id: bigint | number
+  @column()
+  declare link: string | null
+  @column()
+  declare maintenance: boolean
+  @column()
+  declare perso: boolean
+  @column()
+  declare projectCategoryId: bigint | number | null
+  @column()
+  declare size: string
+  @column()
+  declare stack: string
+  @column()
+  declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
   $columns = UserSchema.$columns
@@ -17,7 +109,7 @@ export class UserSchema extends BaseModel {
   @column()
   declare fullName: string | null
   @column({ isPrimary: true })
-  declare id: number
+  declare id: bigint | number
   @column({ serializeAs: null })
   declare password: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })

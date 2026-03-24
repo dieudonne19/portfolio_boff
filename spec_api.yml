@@ -1,0 +1,219 @@
+openapi: 3.0.3
+info:
+  title: Portfolio Boff Public API
+  version: 1.0.0
+  description: Read-only endpoints consumed by the external Next.js portfolio.
+servers:
+  - url: http://localhost:3333
+    description: Local development
+security:
+  - ApiKeyAuth: []
+paths:
+  /api/projects:
+    get:
+      summary: List all projects
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Projects returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/projects/{id}:
+    get:
+      summary: Get one project by id
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Project returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Project not found
+  /api/project-categories:
+    get:
+      summary: List all project categories
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: Categories returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjectCategory'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Invalid API key
+  schemas:
+    Project:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - size
+        - stack
+        - category
+        - perso
+        - maintenance
+        - images
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+          example: "1"
+        title:
+          type: string
+          example: Portfolio Boff
+        description:
+          type: string
+          example: Personal portfolio website
+        size:
+          type: string
+          enum: [large, medium, small]
+        stack:
+          type: string
+          example: Next.js, AdonisJS, PostgreSQL
+        category:
+          $ref: '#/components/schemas/ProjectCategorySummary'
+        perso:
+          type: boolean
+        link:
+          type: string
+          nullable: true
+          example: https://portfolio-roan-eight-66.vercel.app
+        maintenance:
+          type: boolean
+        images:
+          $ref: '#/components/schemas/ProjectImages'
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+    ProjectCategory:
+      type: object
+      required:
+        - id
+        - name
+        - label
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+          example: "1"
+        name:
+          type: string
+          example: web
+        label:
+          type: string
+          example: Web
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+    ProjectCategorySummary:
+      type: object
+      required:
+        - name
+        - label
+      properties:
+        name:
+          type: string
+          example: web
+        label:
+          type: string
+          example: Web
+    ProjectImages:
+      type: object
+      required:
+        - presentation
+        - others
+      properties:
+        presentation:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Image'
+        others:
+          type: array
+          items:
+            $ref: '#/components/schemas/Image'
+    Image:
+      type: object
+      required:
+        - id
+        - url
+        - publicId
+        - width
+        - height
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: integer
+          example: 12
+        url:
+          type: string
+          format: uri
+        publicId:
+          type: string
+          nullable: true
+        width:
+          type: integer
+          example: 1920
+        height:
+          type: integer
+          example: 1080
+        createdAt:
+          type: string
+          format: date-time
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true

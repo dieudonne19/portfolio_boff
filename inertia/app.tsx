@@ -1,12 +1,13 @@
-import './css/app.css'
-import { ReactElement } from 'react'
-import { client } from './client'
-import Layout from '~/layouts/default'
-import { Data } from '@generated/data'
-import { createRoot } from 'react-dom/client'
-import { createInertiaApp } from '@inertiajs/react'
-import { TuyauProvider } from '@adonisjs/inertia/react'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
+import { TuyauProvider } from '@adonisjs/inertia/react'
+import { Data } from '@generated/data'
+import { createInertiaApp } from '@inertiajs/react'
+import { ReactElement } from 'react'
+import { createRoot } from 'react-dom/client'
+import { PageLayout } from '~/lib/page-layout'
+import { client } from './client'
+import './css/app.css'
+import { ThemeProvider } from './layouts/theme-provider'
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
@@ -16,13 +17,20 @@ createInertiaApp({
     return resolvePageComponent(
       `./pages/${name}.tsx`,
       import.meta.glob('./pages/**/*.tsx'),
-      (page: ReactElement<Data.SharedProps>) => <Layout children={page} />
+      (page: ReactElement<Data.SharedProps>) => <PageLayout name={name} children={page} />
     )
   },
   setup({ el, App, props }) {
     createRoot(el).render(
       <TuyauProvider client={client}>
-        <App {...props} />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <App {...props} />
+        </ThemeProvider>
       </TuyauProvider>
     )
   },
