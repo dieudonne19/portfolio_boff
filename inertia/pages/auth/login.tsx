@@ -1,4 +1,4 @@
-import { Form, Link } from '@adonisjs/inertia/react'
+import { Form } from '@adonisjs/inertia/react'
 import { Head } from '@inertiajs/react'
 import { Loader } from 'lucide-react'
 import { Button } from '~/components/ui/button'
@@ -70,17 +70,6 @@ export default function Login() {
                   </div>
                 )}
               </Form>
-
-              <div className="mt-8 border border-border bg-card p-4 text-sm text-stone-600">
-                No account yet?{' '}
-                <Link
-                  href="/signup"
-                  className="font-medium text-amber-800 underline-offset-4 hover:underline"
-                >
-                  Create one here
-                </Link>
-                .
-              </div>
             </div>
           </section>
         </div>

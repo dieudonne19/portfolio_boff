@@ -36,18 +36,6 @@ const routes = {
     tokens: [{"old":"/api/project-categories","type":0,"val":"api","end":""},{"old":"/api/project-categories","type":0,"val":"project-categories","end":""}],
     types: placeholder as Registry['project_categories.index']['types'],
   },
-  'new_account.create': {
-    methods: ["GET","HEAD"],
-    pattern: '/signup',
-    tokens: [{"old":"/signup","type":0,"val":"signup","end":""}],
-    types: placeholder as Registry['new_account.create']['types'],
-  },
-  'new_account.store': {
-    methods: ["POST"],
-    pattern: '/signup',
-    tokens: [{"old":"/signup","type":0,"val":"signup","end":""}],
-    types: placeholder as Registry['new_account.store']['types'],
-  },
   'session.create': {
     methods: ["GET","HEAD"],
     pattern: '/login',

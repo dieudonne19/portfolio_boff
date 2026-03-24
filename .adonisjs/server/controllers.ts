@@ -8,7 +8,6 @@ export const controllers = {
   DashboardProjectCategories: () => import('#controllers/dashboard_project_categories_controller'),
   DashboardProjects: () => import('#controllers/dashboard_projects_controller'),
   Images: () => import('#controllers/images_controller'),
-  NewAccount: () => import('#controllers/new_account_controller'),
   ProjectCategories: () => import('#controllers/project_categories_controller'),
   Projects: () => import('#controllers/projects_controller'),
   ProjectsPage: () => import('#controllers/projects_page_controller'),

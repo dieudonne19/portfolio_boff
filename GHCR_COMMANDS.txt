@@ -1,0 +1,31 @@
+1. Optionnel: construire et tester l'image localement
+docker build -t portofolio_boff:latest .
+docker run --rm -p 3333:3333 --env-file .env portofolio_boff:latest
+
+2. Se connecter a GitHub Container Registry
+echo <GITHUB_TOKEN> | docker login ghcr.io -u <GITHUB_USERNAME> --password-stdin
+
+3. Definir les variables pour le nom de l'image
+set GHCR_OWNER=<GITHUB_USERNAME_OR_ORG>
+set IMAGE_NAME=portofolio_boff
+set IMAGE_TAG=latest
+
+4. Tagger l'image pour GHCR
+docker tag portofolio_boff:latest ghcr.io/%GHCR_OWNER%/%IMAGE_NAME%:%IMAGE_TAG%
+
+5. Pousser l'image sur GHCR
+docker push ghcr.io/%GHCR_OWNER%/%IMAGE_NAME%:%IMAGE_TAG%
+
+6. Verifier l'image publiee
+docker pull ghcr.io/%GHCR_OWNER%/%IMAGE_NAME%:%IMAGE_TAG%
+
+Notes:
+- Le token GitHub doit avoir au minimum le scope write:packages.
+- Si le package doit etre lie a un repository GitHub, pousse aussi ton code sur ce repository avant.
+- Au runtime, passe les variables d'environnement requises avec --env-file .env ou via ton hebergeur.
+- Sous PowerShell, tu peux aussi definir les variables comme ca:
+  $env:GHCR_OWNER="<GITHUB_USERNAME_OR_ORG>"
+  $env:IMAGE_NAME="portofolio_boff"
+  $env:IMAGE_TAG="latest"
+  docker tag portofolio_boff:latest ghcr.io/$env:GHCR_OWNER/$env:IMAGE_NAME:$env:IMAGE_TAG
+  docker push ghcr.io/$env:GHCR_OWNER/$env:IMAGE_NAME:$env:IMAGE_TAG
