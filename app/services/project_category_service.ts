@@ -11,8 +11,21 @@ export default class ProjectCategoryService {
     return categories.map((category) => this.serialize(category))
   }
 
+  async find(id: number) {
+    const category = await ProjectCategory.findOrFail(id)
+    return this.serialize(category)
+  }
+
   async create(payload: ProjectCategoryPayload) {
     const category = await ProjectCategory.create(payload)
+    return this.serialize(category)
+  }
+
+  async update(id: number, payload: ProjectCategoryPayload) {
+    const category = await ProjectCategory.findOrFail(id)
+    category.merge(payload)
+    await category.save()
+
     return this.serialize(category)
   }
 

@@ -1,19 +1,11 @@
-import { Form, Link } from '@adonisjs/inertia/react'
+import { Link } from '@adonisjs/inertia/react'
 import { Head } from '@inertiajs/react'
-import { ChevronLeft } from 'lucide-react'
-import { Button, buttonVariants } from '~/components/ui/button'
-import { Input } from '~/components/ui/input'
-import { Label } from '~/components/ui/label'
+import { ChevronLeft, Pencil } from 'lucide-react'
+import { ProjectCategoryForm } from '~/components/pages/dashboard/project-category-form'
+import { buttonVariants } from '~/components/ui/button'
 import type { InertiaProps } from '~/types'
 
-function FieldError({ error }: { error?: string }) {
-  if (!error) return null
-
-  return <p className="text-sm text-red-600">{error}</p>
-}
-
 export default function DashboardProjectCategoriesCreate({
-  user,
   categories,
 }: InertiaProps<{
   categories: {
@@ -37,31 +29,12 @@ export default function DashboardProjectCategoriesCreate({
             </Link>
           </div>
 
-          <Form action="/dashboard/project-categories" method="post">
-            {({ errors, processing }) => (
-              <div className="space-y-5">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Internal name</Label>
-                  <Input id="name" name="name" placeholder="web-app" />
-                  <p className="text-xs text-stone-500">
-                    Stable slug-like name used by the backend.
-                  </p>
-                  <FieldError error={errors.name} />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="label">Display label</Label>
-                  <Input id="label" name="label" placeholder="Web App" />
-                  <p className="text-xs text-stone-500">Human-readable label shown in the UI.</p>
-                  <FieldError error={errors.label} />
-                </div>
-
-                <Button type="submit" size="lg" className="w-full" disabled={processing}>
-                  {processing ? 'Creating...' : 'Create category'}
-                </Button>
-              </div>
-            )}
-          </Form>
+          <ProjectCategoryForm
+            action="/dashboard/project-categories"
+            method="post"
+            submitLabel="Create category"
+            submittingLabel="Creating..."
+          />
         </section>
 
         <section className="p-4 bg-card">
@@ -76,11 +49,17 @@ export default function DashboardProjectCategoriesCreate({
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {categories.map((category) => (
-              <article
-                key={category.id}
-                className="rounded-lg border border-stone-200 bg-stone-50 py-2 px-4"
-              >
-                <div className="text-lg font-semibold text-stone-900">{category.label}</div>
+              <article key={category.id} className="rounded-lg border bg-card py-2 px-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="text-lg font-semibold">{category.label}</div>
+                  <Link
+                    href={`/dashboard/project-categories/${category.id}/edit`}
+                    className={buttonVariants({ variant: 'ghost', size: 'icon' })}
+                  >
+                    <Pencil className="size-4" />
+                    <span className="sr-only">Edit {category.label}</span>
+                  </Link>
+                </div>
                 <div className="mt-1 text-sm text-stone-500">{category.name}</div>
               </article>
             ))}

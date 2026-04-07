@@ -139,6 +139,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/dashboard_project_categories_controller').default['create']>>>
     }
   }
+  'dashboard.project_categories.edit': {
+    methods: ["GET","HEAD"]
+    pattern: '/dashboard/project-categories/:id/edit'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/dashboard_project_categories_controller').default['edit']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/dashboard_project_categories_controller').default['edit']>>>
+    }
+  }
   'session.destroy': {
     methods: ["POST"]
     pattern: '/logout'
@@ -173,6 +185,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#validators/project_category').projectCategoryValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/dashboard_project_categories_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/dashboard_project_categories_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'dashboard.project_categories.update': {
+    methods: ["PUT"]
+    pattern: '/dashboard/project-categories/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/project_category').updateProjectCategoryValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/project_category').updateProjectCategoryValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/dashboard_project_categories_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/dashboard_project_categories_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'projects.store': {
@@ -221,6 +245,18 @@ export interface Registry {
       query: ExtractQuery<InferInput<(typeof import('#validators/project_category').projectCategoryValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/project_categories_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/project_categories_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'project_categories.update': {
+    methods: ["PUT"]
+    pattern: '/api/project-categories/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/project_category').projectCategoryValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/project_category').projectCategoryValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/project_categories_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/project_categories_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'images.store': {

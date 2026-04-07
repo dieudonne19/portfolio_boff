@@ -14,6 +14,7 @@ export interface ApiDefinition {
   projectCategories: {
     index: typeof routes['project_categories.index']
     store: typeof routes['project_categories.store']
+    update: typeof routes['project_categories.update']
   }
   session: {
     create: typeof routes['session.create']
@@ -28,7 +29,9 @@ export interface ApiDefinition {
     }
     projectCategories: {
       create: typeof routes['dashboard.project_categories.create']
+      edit: typeof routes['dashboard.project_categories.edit']
       store: typeof routes['dashboard.project_categories.store']
+      update: typeof routes['dashboard.project_categories.update']
     }
   }
   images: {

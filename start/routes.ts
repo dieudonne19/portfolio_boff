@@ -56,6 +56,9 @@ router
     router
       .get('dashboard/project-categories/new', [DashboardProjectCategoriesController, 'create'])
       .as('dashboard.project_categories.create')
+    router
+      .get('dashboard/project-categories/:id/edit', [DashboardProjectCategoriesController, 'edit'])
+      .as('dashboard.project_categories.edit')
     router.post('logout', [controllers.Session, 'destroy'])
     router
       .post('dashboard/projects', [DashboardProjectsController, 'store'])
@@ -63,6 +66,9 @@ router
     router
       .post('dashboard/project-categories', [DashboardProjectCategoriesController, 'store'])
       .as('dashboard.project_categories.store')
+    router
+      .put('dashboard/project-categories/:id', [DashboardProjectCategoriesController, 'update'])
+      .as('dashboard.project_categories.update')
 
     router.post('api/projects', [ProjectsController, 'store']).as('projects.store')
     router.put('api/projects/:id', [ProjectsController, 'update']).as('projects.update')
@@ -70,6 +76,9 @@ router
     router
       .post('api/project-categories', [ProjectCategoriesController, 'store'])
       .as('project_categories.store')
+    router
+      .put('api/project-categories/:id', [ProjectCategoriesController, 'update'])
+      .as('project_categories.update')
 
     router.post('api/projects/:projectId/images', [ImagesController, 'store']).as('images.store')
     router

@@ -15,13 +15,16 @@ export type ScannedRoutes = {
     'dashboard.projects.index': { paramsTuple?: []; params?: {} }
     'dashboard.projects.create': { paramsTuple?: []; params?: {} }
     'dashboard.project_categories.create': { paramsTuple?: []; params?: {} }
+    'dashboard.project_categories.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'session.destroy': { paramsTuple?: []; params?: {} }
     'dashboard.projects.store': { paramsTuple?: []; params?: {} }
     'dashboard.project_categories.store': { paramsTuple?: []; params?: {} }
+    'dashboard.project_categories.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'projects.store': { paramsTuple?: []; params?: {} }
     'projects.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'projects.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'project_categories.store': { paramsTuple?: []; params?: {} }
+    'project_categories.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'images.store': { paramsTuple: [ParamValue]; params: {'projectId': ParamValue} }
     'images.upload': { paramsTuple: [ParamValue]; params: {'projectId': ParamValue} }
     'images.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -38,6 +41,7 @@ export type ScannedRoutes = {
     'dashboard.projects.index': { paramsTuple?: []; params?: {} }
     'dashboard.projects.create': { paramsTuple?: []; params?: {} }
     'dashboard.project_categories.create': { paramsTuple?: []; params?: {} }
+    'dashboard.project_categories.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
     'home': { paramsTuple?: []; params?: {} }
@@ -50,6 +54,7 @@ export type ScannedRoutes = {
     'dashboard.projects.index': { paramsTuple?: []; params?: {} }
     'dashboard.projects.create': { paramsTuple?: []; params?: {} }
     'dashboard.project_categories.create': { paramsTuple?: []; params?: {} }
+    'dashboard.project_categories.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'session.store': { paramsTuple?: []; params?: {} }
@@ -62,7 +67,9 @@ export type ScannedRoutes = {
     'images.upload': { paramsTuple: [ParamValue]; params: {'projectId': ParamValue} }
   }
   PUT: {
+    'dashboard.project_categories.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'projects.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'project_categories.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'images.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {

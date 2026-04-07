@@ -72,6 +72,12 @@ const routes = {
     tokens: [{"old":"/dashboard/project-categories/new","type":0,"val":"dashboard","end":""},{"old":"/dashboard/project-categories/new","type":0,"val":"project-categories","end":""},{"old":"/dashboard/project-categories/new","type":0,"val":"new","end":""}],
     types: placeholder as Registry['dashboard.project_categories.create']['types'],
   },
+  'dashboard.project_categories.edit': {
+    methods: ["GET","HEAD"],
+    pattern: '/dashboard/project-categories/:id/edit',
+    tokens: [{"old":"/dashboard/project-categories/:id/edit","type":0,"val":"dashboard","end":""},{"old":"/dashboard/project-categories/:id/edit","type":0,"val":"project-categories","end":""},{"old":"/dashboard/project-categories/:id/edit","type":1,"val":"id","end":""},{"old":"/dashboard/project-categories/:id/edit","type":0,"val":"edit","end":""}],
+    types: placeholder as Registry['dashboard.project_categories.edit']['types'],
+  },
   'session.destroy': {
     methods: ["POST"],
     pattern: '/logout',
@@ -89,6 +95,12 @@ const routes = {
     pattern: '/dashboard/project-categories',
     tokens: [{"old":"/dashboard/project-categories","type":0,"val":"dashboard","end":""},{"old":"/dashboard/project-categories","type":0,"val":"project-categories","end":""}],
     types: placeholder as Registry['dashboard.project_categories.store']['types'],
+  },
+  'dashboard.project_categories.update': {
+    methods: ["PUT"],
+    pattern: '/dashboard/project-categories/:id',
+    tokens: [{"old":"/dashboard/project-categories/:id","type":0,"val":"dashboard","end":""},{"old":"/dashboard/project-categories/:id","type":0,"val":"project-categories","end":""},{"old":"/dashboard/project-categories/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['dashboard.project_categories.update']['types'],
   },
   'projects.store': {
     methods: ["POST"],
@@ -113,6 +125,12 @@ const routes = {
     pattern: '/api/project-categories',
     tokens: [{"old":"/api/project-categories","type":0,"val":"api","end":""},{"old":"/api/project-categories","type":0,"val":"project-categories","end":""}],
     types: placeholder as Registry['project_categories.store']['types'],
+  },
+  'project_categories.update': {
+    methods: ["PUT"],
+    pattern: '/api/project-categories/:id',
+    tokens: [{"old":"/api/project-categories/:id","type":0,"val":"api","end":""},{"old":"/api/project-categories/:id","type":0,"val":"project-categories","end":""},{"old":"/api/project-categories/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['project_categories.update']['types'],
   },
   'images.store': {
     methods: ["POST"],

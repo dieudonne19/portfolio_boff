@@ -14,20 +14,20 @@ export default function ProjectsIndex({
   return (
     <>
       <Head title="Projects" />
-      <main className="min-h-screen bg-stone-50 text-stone-950">
+      <main className="min-h-screen">
         <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-5 py-8 sm:px-8 lg:px-12">
-          <header className="border-b border-stone-200 pb-10">
+          <header className="border-b pb-10">
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
-                <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-stone-500">
+                <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-muted-foreground">
                   Selected Projects
                 </p>
                 <h1 className="mt-4 max-w-2xl text-4xl font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
                   Work reduced to what matters.
                 </h1>
-                <p className="mt-4 max-w-xl text-sm leading-6 text-stone-600 sm:text-base">
-                  A quiet index of projects, systems and interfaces. No staging, no noise, just
-                  the work and its structure.
+                <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base">
+                  A quiet index of projects, systems and interfaces. No staging, no noise, just the
+                  work and its structure.
                 </p>
               </div>
 
@@ -48,7 +48,7 @@ export default function ProjectsIndex({
             </div>
           </header>
 
-          <section className="flex items-center justify-between border-b border-stone-200 py-4 text-sm text-stone-500">
+          <section className="flex items-center justify-between border-b py-4 text-sm text-muted-foreground">
             <p>{projects.length} projects</p>
             <p>Portfolio index</p>
           </section>
@@ -62,8 +62,12 @@ export default function ProjectsIndex({
               </div>
             ) : (
               <div className="border border-dashed border-stone-300 px-6 py-16 text-center">
-                <p className="text-sm uppercase tracking-[0.28em] text-stone-500">No projects</p>
-                <p className="mt-3 text-lg text-stone-700">The portfolio is empty for now.</p>
+                <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">
+                  No projects
+                </p>
+                <p className="mt-3 text-lg text-muted-foreground">
+                  The portfolio is empty for now.
+                </p>
               </div>
             )}
           </section>

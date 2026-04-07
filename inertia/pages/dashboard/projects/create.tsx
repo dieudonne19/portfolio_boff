@@ -1,8 +1,16 @@
 import { Form, Link } from '@adonisjs/inertia/react'
 import { Head } from '@inertiajs/react'
+import { ChevronLeft } from 'lucide-react'
 import { Button, buttonVariants } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select'
 import { Textarea } from '~/components/ui/textarea'
 import type { InertiaProps } from '~/types'
 
@@ -25,18 +33,16 @@ export default function DashboardProjectsCreate({
   return (
     <>
       <Head title="Upload Project" />
-      <section className="p-4">
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight">
-              Build the next portfolio entry
-            </h2>
-          </div>
-          <Link href="/dashboard/projects" className={buttonVariants()}>
-            Back to Projects
-          </Link>
+      <div className="h-16 sticky top-0 bg-sidebar border-b z-4 left-0 flex gap-2 items-center justify-between px-4">
+        <div>
+          <h2 className="text-lg font-semibold tracking-tight">Your Project</h2>
         </div>
-
+        <Link href="/dashboard/projects" className={buttonVariants()}>
+          <ChevronLeft />
+          Projects
+        </Link>
+      </div>
+      <section className="relative px-4 mt-4">
         <Form action="/dashboard/projects" method="post" encType="multipart/form-data">
           {({ errors, processing }) => (
             <div className="grid gap-8 xl:grid-cols-[1.1fr_0.9fr]">
@@ -61,16 +67,16 @@ export default function DashboardProjectsCreate({
 
                   <div className="space-y-2">
                     <Label htmlFor="size">Card Size</Label>
-                    <select
-                      id="size"
-                      name="size"
-                      defaultValue="medium"
-                      className="h-10 w-full rounded-lg border border-input bg-transparent px-3 text-sm outline-none focus-visible:border-ring"
-                    >
-                      <option value="small">Small</option>
-                      <option value="medium">Medium</option>
-                      <option value="large">Large</option>
-                    </select>
+                    <Select name="size" defaultValue="medium">
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Project size" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="small">Small</SelectItem>
+                        <SelectItem value="medium">Medium</SelectItem>
+                        <SelectItem value="large">Large</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FieldError error={errors.size} />
                   </div>
 
@@ -94,7 +100,19 @@ export default function DashboardProjectsCreate({
                         Create category
                       </Link>
                     </div>
-                    <select
+                    <Select name="projectCategoryId" defaultValue="">
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categories.map((category) => (
+                          <SelectItem key={category.id} value={String(category.id)}>
+                            {category.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {/* <select
                       id="projectCategoryId"
                       name="projectCategoryId"
                       className="h-10 w-full rounded-lg border border-input bg-transparent px-3 text-sm outline-none focus-visible:border-ring"
@@ -108,7 +126,7 @@ export default function DashboardProjectsCreate({
                           {category.label}
                         </option>
                       ))}
-                    </select>
+                    </select> */}
                     <FieldError error={errors.projectCategoryId} />
                   </div>
 
