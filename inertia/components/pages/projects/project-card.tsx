@@ -14,9 +14,10 @@ import { Project } from '~/types/models/project'
 
 type ProjectCardProps = {
   project: Project
+  isPublic?: boolean
 }
 
-export const ProjectCard = ({ project }: ProjectCardProps) => {
+export const ProjectCard = ({ project, isPublic = false }: ProjectCardProps) => {
   return (
     <Card key={project.id} className="overflow-hidden">
       <CardHeader>
@@ -30,7 +31,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           <div className="flex h-56 items-center justify-center">No preview image</div>
         )}
       </CardHeader>
-      <CardContent className="w-full">
+      <CardContent className="w-full min-h-40">
         <div className="w-full items-center flex justify-between">
           <h3 className="text-2xl font-semibold tracking-tight">{project.title}</h3>
           {project.link ? (
@@ -49,18 +50,18 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           <p className="mt-2 text-sm leading-6 text-stone-600">{project.description}</p>
         </div>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2">
+      <CardFooter className="flex-col items-start justify-between gap-2">
         <div className="flex items-center gap-2">
-          <Badge variant={'pending'}>
-            <ChevronsLeftRight />
-            <span>{project.size}</span>
-          </Badge>
           {project.perso ? (
             <Badge variant="success" className="">
               <User />
               <span>Personal</span>
             </Badge>
           ) : null}
+          <Badge variant={'pending'}>
+            <ChevronsLeftRight />
+            <span>{project.size}</span>
+          </Badge>
           {project.maintenance ? (
             <Badge variant={'warning'}>
               <Wrench />
@@ -71,10 +72,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         <div className="w-full flex gap-4">
           <div className="w-1/2 flex items-center gap-2">
             <div className="flex items-center gap-4">
-              {/* <div className="flex items-center">
-                <Code2 className="size-4" />
-              </div> */}
-              <Badge variant={'info'}>{project.stack}</Badge>
+              <Badge variant={'info'}>{project.stack.split(',').join(' | ')}</Badge>
             </div>
           </div>
           <div className="w-1/2 flex items-center justify-end gap-2">
@@ -84,6 +82,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
               preserveScroll
               preserveUrl
               href={`/api/projects/${project.id}`}
+              hidden={isPublic}
             >
               <Trash2 />
               Delete

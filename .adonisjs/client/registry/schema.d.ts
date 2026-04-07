@@ -251,10 +251,10 @@ export interface Registry {
     methods: ["PUT"]
     pattern: '/api/project-categories/:id'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/project_category').projectCategoryValidator)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/project_category').updateProjectCategoryValidator)>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('#validators/project_category').projectCategoryValidator)>>
+      query: ExtractQuery<InferInput<(typeof import('#validators/project_category').updateProjectCategoryValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/project_categories_controller').default['update']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/project_categories_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }

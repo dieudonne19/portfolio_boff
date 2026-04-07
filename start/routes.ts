@@ -20,6 +20,10 @@ const DashboardProjectCategoriesController = () =>
 const ProjectCategoriesController = () => import('#controllers/project_categories_controller')
 const ProjectsPageController = () => import('#controllers/projects_page_controller')
 
+router.get('/ping', async () => {
+  return 'pong'
+})
+
 router.on('/').renderInertia('home', {}).as('home')
 
 router.get('projects', [ProjectsPageController, 'index']).as('projects.page')

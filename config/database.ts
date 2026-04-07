@@ -2,6 +2,13 @@ import env from '#start/env'
 import app from '@adonisjs/core/services/app'
 import { defineConfig } from '@adonisjs/lucid'
 
+const databaseUrl = env.get('DATABASE_URL')
+const ssl = env.get('DB_SSL')
+  ? {
+      rejectUnauthorized: false,
+    }
+  : undefined
+
 const dbConfig = defineConfig({
   /**
    * Default connection used for all queries.
@@ -15,16 +22,19 @@ const dbConfig = defineConfig({
      */
     pg: {
       client: 'pg',
-      connection: {
-        host: env.get('DB_HOST'),
-        port: Number(env.get('DB_PORT')) || 3333,
-        user: env.get('DB_USER'),
-        password: env.get('DB_PASSWORD'),
-        database: env.get('DB_DATABASE'),
-        // ssl: {
-        //   rejectUnauthorized: false,
-        // },
-      },
+      connection: databaseUrl
+        ? {
+            connectionString: databaseUrl,
+            ssl,
+          }
+        : {
+            host: env.get('DB_HOST')!,
+            port: Number(env.get('DB_PORT')) || 5432,
+            user: env.get('DB_USER')!,
+            password: env.get('DB_PASSWORD')!,
+            database: env.get('DB_DATABASE')!,
+            ssl,
+          },
       migrations: {
         naturalSort: true,
         paths: ['database/migrations'],
